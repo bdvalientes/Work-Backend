@@ -12,6 +12,8 @@ const port = process.env.PORT || 3001
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
+
+// Mostrar Todos Los Usuario 
 app.get('/api/UserInfo', (req,res)=> {
     UserInfo.find({},(err,userinfo)=>{
         if(err) return res.status(500).send({message: `Error al realizar la peticion ${err}`})
@@ -21,6 +23,8 @@ app.get('/api/UserInfo', (req,res)=> {
     })
 })
 
+
+//Mostrar Usuario Especifico
 app.get('/api/UserInfo/:UserId', (req,res)=> {
     let UserId = req.params.UserId
     
@@ -33,6 +37,8 @@ app.get('/api/UserInfo/:UserId', (req,res)=> {
     })
 })
 
+
+//Crear Usuario
 app.post('/api/UserInfo',(req,res)=>{
     console.log('POST /api/UserInfo')
     console.log(req.body)
