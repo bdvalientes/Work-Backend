@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const shema = mongoose.Schema
+const Schema = mongoose.Schema
 
 const WorkShema = new Schema({
     work: {
@@ -22,7 +22,6 @@ const WorkShema = new Schema({
     },
     student: {
         name: String,
-        avatar: String,
         infoComunication: String,
         studentId: String
     }
