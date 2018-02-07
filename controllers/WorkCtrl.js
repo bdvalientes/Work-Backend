@@ -35,12 +35,31 @@ function saveWorkInfo(req,res){
     })
 }
 
-function updateWorkInfo(res,req){
-    
+function updateWorkInfo(req,res){
+    let WorkId = req.params.WorkId
+    let UpdateWork = req.body
+
+    WorkInfo.findByIdAndUpdate(WorkId,UpdateWork,(err,updateWork)=>{
+        if(err) res.status(500).send({message: `Error Al Actualizar Tarea: ${err}`})
+
+
+        res.status(200).send({message: `Se Actualizo:` , updateWork })
+        console.log(updateWork);
+    })
 }
 
-function deleteWorkInfo(res,req){
+function deleteWorkInfo(req,res){
+    let WorkId = req.params.WorkId
     
+    WorkInfo.findById(WorkId,(err,WorkDelete)=>{
+        if(err) res.status(500).send({message: `Error: Borrar Tarea ${err}`})
+
+        WorkDelete.remove(err => {
+            if(err) res.status(500).send({message: `Error Remove: Al Borrar Tarea ${err}` })
+
+            res.status(200).send({message: `La Tarea A Sido Borrada Ezitosamente`})
+        })
+    })
 }
 
 module.exports = {
