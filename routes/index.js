@@ -25,5 +25,9 @@ api.post('/WorkInfo',WorkCtrl.saveWorkInfo)
 api.get('/WorkInfo',WorkCtrl.getWorksInfo)
 //Mostrar WorkInfo Especifico
 api.get('/WorkInfo/:WorkId',WorkCtrl.getWorkInfo)
+//Eliminar Tarea
+api.delete('/WorkInfo/:WorkId',WorkCtrl.deleteWorkInfo)
+//Actualizar Tarea
+api.put('/WorkInfo/:WorkId',WorkCtrl.updateWorkInfo)
 
 module.exports = api
