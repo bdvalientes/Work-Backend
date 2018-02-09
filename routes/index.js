@@ -30,4 +30,5 @@ api.delete('/WorkInfo/:WorkId',WorkCtrl.deleteWorkInfo)
 //Actualizar Tarea
 api.put('/WorkInfo/:WorkId',WorkCtrl.updateWorkInfo)
 
+
 module.exports = api
