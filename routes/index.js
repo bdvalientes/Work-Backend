@@ -4,6 +4,8 @@ const express = require('express')
 const UserCtrl = require('../controllers/UserCtrl')
 const WorkCtrl = require('../controllers/WorkCtrl')
 const api = express.Router()
+const authUserInfo = require('../controllers/authUser')
+const auth = require('../middlewares/auth')
 
 
 //Crear UserInfo
@@ -17,7 +19,15 @@ api.delete('/UserInfo/:UserId',UserCtrl.deleteUserInfo)
 //Actualizar UserInfo
 api.put('/UserInfo/:UserId',UserCtrl.updateUserInfo)
 
+//Crear UserInfo Con Token
+api.post('/signUp',authUserInfo.signUp)
+//Ingresar Login User Info
+api.post('/signIn',authUserInfo.signIn)
 
+//Probar Token
+api.get('/private',auth, (req,res) =>{
+    res.status(200).send({message: `Tiene Acceso`})
+})
 
 //Crear WorkInfo
 api.post('/WorkInfo',WorkCtrl.saveWorkInfo)

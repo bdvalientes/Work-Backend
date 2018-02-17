@@ -7,8 +7,9 @@ const config = require('../config')
 
 //Creacion De Tokens
 function createToken(user){
+    
     const payload = {
-        sub: user,
+        sub:user,
         iat: moment().unix(),
         exp: moment().add(1,'month').unix(),
     }
