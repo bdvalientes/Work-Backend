@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 const Shema = mongoose.Schema
-
+const bcrypt = require('bcrypt')
 const UserShema = new Shema({
     email: {
         type: String,
@@ -33,21 +33,22 @@ const UserShema = new Shema({
     }
 })
 
-UserShema.pre('save',(next)=>{
+UserShema.pre('save',function(next) {
     let user = this
-    if(!user.isModified('password')) return next()
-
-    bcrypy.genSalt(10,(err,salt)=>{
-        if(err) return next(err)
-
-        bcrypy.hash(user.password,salt,null,(err,hash)=>{
-            if(err) return next(err)
-
-            user.password = hash
-            next()
-        })
+    if (!user.isModified('password')) return next()
+  
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err)  return next(err)
+  
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        if (err)
+          return next(err)
+  
+        user.password = hash
+        next()
+      })
     })
-})
+  })
 
 UserShema.methods.gravatar = function () {
     if (!this.email) return `https://gravatar.com/avatar/?s=200&d=retro`
