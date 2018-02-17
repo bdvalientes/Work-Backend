@@ -9,12 +9,13 @@ function signUp(req,res){
     const user = new UserInfo({
         email: req.body.email,
         displayName: req.body.displayName,
-        password: req.body.password
+        password: req.body.password,
+        lastLogin: Date.now()
     })
 
     user.save((err)=> {
         if(err) res.status(500).send({message: `Error Al Crear Usuario ${err}`})
-
+        
         return res.status(200).send({token: service.createToken(user)})
     })
 }
